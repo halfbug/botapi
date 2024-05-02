@@ -10,7 +10,7 @@ class BaseConfig(BaseSettings):
     ENV_STATE: Optional[str] = None
 
     model_config = SettingsConfigDict(
-        env_file=f"{Path(__file__).parent.parent.parent}\.env",
+        env_file=".env",
         extra="ignore",
         env_file_encoding="utf-8",
     )
