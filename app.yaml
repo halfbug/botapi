@@ -1,6 +1,6 @@
 service: api-workroom
 runtime: python39
-entrypoint: uvicorn app.main:app
+entrypoint: gunicorn -b :$PORT app.main:app
 
 handlers:
 - url: /.*

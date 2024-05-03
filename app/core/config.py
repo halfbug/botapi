@@ -1,5 +1,3 @@
-import os
-from pathlib import Path
 from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -25,20 +23,20 @@ class GlobalConfig(BaseConfig):
     MAILGUN_DOMAIN: Optional[str] = None
     GOO_API_KEY_ID: Optional[str] = None
     GOO_BUCKET_NAME: Optional[str] = None
-    G_API_KEY: Optional[str] = None
-    OPENAI_API_KEY: Optional[str] = None
+    GOOGLE_API_KEY: Optional[str] = None
+    GOOGLE_CSE_ID: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
     SENTRY_DSN: Optional[str] = None
 
 
 class DevConfig(GlobalConfig):
-    model_config = SettingsConfigDict()#env_prefix="DEV_"
+    model_config = SettingsConfigDict()  # env_prefix="DEV_"
 
 
 class ProdConfig(GlobalConfig):
     model_config = SettingsConfigDict(env_prefix="PROD_")
 
- 
+
 class TestConfig(GlobalConfig):
     DATABASE_URL: str = "sqlite:///test.db"
     DB_FORCE_ROLL_BACK: bool = True
@@ -59,7 +57,7 @@ def get_config(env_state: str):
 
 # print(f"{Path(__file__).parent.parent.parent}\.env")
 # print(os.path.expanduser("~/.env"))
-# print(GlobalConfig().DATABASE_URL)  
+# print(GlobalConfig().DATABASE_URL)
 # print(BaseConfig().ENV_STATE)
 # print(get_config(BaseConfig().ENV_STATE))
 config = get_config(BaseConfig().ENV_STATE)
