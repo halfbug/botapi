@@ -1,6 +1,7 @@
 service: api-workroom
 runtime: python39
-entrypoint: uvicorn app.main:application 
+entrypoint: uvicorn app.main:app
+
 
 handlers:
 - url: /.*
@@ -8,3 +9,4 @@ handlers:
   
 vpc_access_connector:
  name: projects/hip-arcadia-419017/locations/us-central1/connectors/workroom-alloydb
+
