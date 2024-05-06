@@ -1,6 +1,6 @@
 # from app.api.routes import api_router_v1
-from api.routes import api_router_v1
-from core.config import config
+from app.api.routes import api_router_v1
+from app.core.config import config
 from fastapi import FastAPI, HTTPException
 
 # Create a FastAPI instance with a route prefix
