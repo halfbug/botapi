@@ -1,28 +1,72 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+# Bot Service README
 
-# Flask + Vercel
+## Overview
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+This bot service is developed using various Python packages to provide a robust and efficient solution. It utilizes FastAPI as the web framework for creating APIs, UVicorn for serving the FastAPI application, and several other packages for specific functionalities such as interacting with Google Cloud Storage, data manipulation with Pandas, environment variable management with Python-dotenv, and more.
 
-## Demo
+## Installation
 
-https://flask-python-template.vercel.app/
-
-## How it Works
-
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
-
-## Running Locally
+To install the required packages, you can use pip. Run the following command in your terminal:
 
 ```bash
-npm i -g vercel
-vercel dev
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-Your Flask application is now available at `http://localhost:3000`.
+## Configuration
 
-## One-Click Deploy
+Before running the service, make sure to set up the necessary configurations. Create a `.env` file in the root directory of your project and add the required environment variables. Here's an example `.env` file:
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+```dotenv
+# Example .env file
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+API_V1_ROUTE="/api/v1"
+ENV_STATE=dev
+DATABASE_URL="postgresql"
+DEV_API_V1_ROUTE="/api/v1"
+GOOGLE_API_KEY="KGLKERLK"
+GOOGLE_CSE_ID="1"
+OPENAI_API_KEY
+
+# Other environment variables...
+```
+
+## Usage
+
+To run the bot service, execute the following command:
+
+```bash
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+.venv\Scripts\activate
+python -m uvicorn app.main:app --reload
+```
+
+This will start the FastAPI application and make it available on `http://localhost:8000`.
+
+## Packages Used
+
+- [FastAPI](https://fastapi.tiangolo.com/): A modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
+- [UVicorn](https://www.uvicorn.org/): A lightning-fast ASGI server, built on uvloop and httptools, for running asynchronous Python web code.
+- [Google Cloud Storage](https://cloud.google.com/storage): A fully-managed, highly-durable, and highly available object storage service.
+- [Pydantic](https://pydantic-docs.helpmanual.io/): Data validation and settings management using Python type annotations.
+- [Pandas](https://pandas.pydata.org/): A fast, powerful, flexible, and easy-to-use open-source data manipulation and analysis library.
+- [Python-dotenv](https://pypi.org/project/python-dotenv/): Reads the key-value pair from `.env` file and adds them to environment variable.
+- [Pydantic-settings](https://pypi.org/project/pydantic-settings/): A lightweight settings management library built on top of Pydantic.
+- [OpenAI](https://openai.com/): A leading AI research lab providing state-of-the-art natural language processing models.
+- [Langchain](https://github.com/ACollectionOfAtoms/langchain): A Python library for creating a chain of language models.
+- [Langchain-openai](https://github.com/ACollectionOfAtoms/langchain-openai): A plugin for Langchain library to use OpenAI language models.
+- [Chromadb](https://github.com/ACollectionOfAtoms/chromadb): A Python library for working with Chroma database.
+- [Langchain_chroma](https://github.com/ACollectionOfAtoms/langchain_chroma): A plugin for Langchain library to use Chroma database.
+- [Html2text](https://pypi.org/project/html2text/): A Python script that converts a page of HTML into clean, easy-to-read plain ASCII text.
+
+## Deployment
+
+For deploying the bot service in production, it's recommended to use a production-ready server such as Gunicorn. You can run the service using Gunicorn with the following command:
+
+```bash
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app -b 0.0.0.0:8000
+```
+
+This command starts Gunicorn with 4 worker processes and binds it to port 8000.
