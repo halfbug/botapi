@@ -1,6 +1,6 @@
 service: api-workroom
 runtime: python39
-entrypoint:  gunicorn --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind :$PORT app.main:application
+entrypoint: uvicorn app.main:app 
 
 handlers:
 - url: /.*
