@@ -1,7 +1,8 @@
 # from app.api.routes import api_router_v1
+from fastapi import FastAPI, HTTPException
+
 from app.api.routes import api_router_v1
 from app.core.config import config
-from fastapi import FastAPI, HTTPException
 
 # Create a FastAPI instance with a route prefix
 app = FastAPI()
@@ -41,7 +42,7 @@ def check_database():
 app.include_router(api_router_v1, prefix=config.API_V1_ROUTE)
 # settings.API_V1_STR
 
-if __name__ == "__main__":
-    import uvicorn
+# if __name__ == "__main__":
+#     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000)
+#     uvicorn.run("main:app", host="0.0.0.0", port=8000)
