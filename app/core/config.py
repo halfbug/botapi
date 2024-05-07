@@ -59,5 +59,5 @@ def get_config(env_state: str):
 # print(os.path.expanduser("~/.env"))
 # print(GlobalConfig().DATABASE_URL)
 # print(BaseConfig().ENV_STATE)
-# print(get_config(BaseConfig().ENV_STATE))
+# print(get_config(BaseConfig()))
 config = get_config(BaseConfig().ENV_STATE)

@@ -4,8 +4,10 @@
 __pycache__
 Downloads
 # Environments 
-.env 
+.env
+.sqlite3 
 .venv 
+.bin
 env/ 
 venv/ 
 ENV/ 
