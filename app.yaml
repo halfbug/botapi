@@ -5,7 +5,7 @@ entrypoint: uvicorn app.main:app
 
 handlers:
 - url: /.*
-  script: auto
+  script: main.py
   
 vpc_access_connector:
  name: projects/hip-arcadia-419017/locations/us-central1/connectors/workroom-alloydb
