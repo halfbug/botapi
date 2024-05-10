@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from app.utils.llm.conversation_agent import ConversationAgent
 from app.utils.llm.openai_model import OpenAIModel
 from app.utils.llm.tools.reverse import create_your_own
-from app.utils.llm.tools.web_search import search_web
+
 
 router = APIRouter()
 
