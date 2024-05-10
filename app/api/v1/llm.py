@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from app.utils.llm.conversation_agent import ConversationAgent
 from app.utils.llm.openai_model import OpenAIModel
+from app.utils.llm.tools.reverse import create_your_own
 from app.utils.llm.tools.web_search import search_web
 
 router = APIRouter()
@@ -25,7 +26,7 @@ async def prompt(request_data: PromptRequest):
     try:
         reply_message = f"You said: {request_data.message}"
 
-        tools = [search_web]  # Define your tools
+        tools = [create_your_own]  # Define your tools
         workroom_modal = OpenAIModel(tools=tools)  # Initialize the OpenAI model
         conversation_agent = ConversationAgent(openai_model=workroom_modal, tools=tools)
 
