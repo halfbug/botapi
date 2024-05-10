@@ -1,14 +1,17 @@
 import os
+
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.retrievers.web_research import WebResearchRetriever
 from langchain.tools import tool
 from langchain_chroma import Chroma
 from langchain_community.utilities import GoogleSearchAPIWrapper
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from bs4 import BeautifulSoup
 from app.core.config import config
 
 os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
 os.environ["GOOGLE_CSE_ID"] = config.GOOGLE_CSE_ID
+os.environ["OPENAI_API_KEY"] = config.OPENAI_API_KEY
 
 
 @tool
@@ -26,7 +29,7 @@ def search_web(query):
     )
 
     # LLM
-    llm = ChatOpenAI(temperature=0)
+    llm = ChatOpenAI(openai_api_key=config.OPENAI_API_KEY, temperature=0)
 
     # Search
     search = GoogleSearchAPIWrapper()
