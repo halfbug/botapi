@@ -1,12 +1,14 @@
 import os
 
-from langchain.chains import RetrievalQAWithSourcesChain
-from langchain.retrievers.web_research import WebResearchRetriever
-from langchain.tools import tool
-from langchain_chroma import Chroma
-from langchain_community.utilities import GoogleSearchAPIWrapper
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from bs4 import BeautifulSoup
+# from langchain.chains import RetrievalQAWithSourcesChain
+# from langchain.retrievers.web_research import WebResearchRetriever
+# from langchain.tools import tool
+# # from langchain.vectorstores import pgvector
+# # from langchain_chroma import Chroma
+# from langchain_community.utilities import GoogleSearchAPIWrapper
+# from langchain_community.vectorstores import FAISS
+# from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+
 from app.core.config import config
 
 os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
@@ -14,7 +16,7 @@ os.environ["GOOGLE_CSE_ID"] = config.GOOGLE_CSE_ID
 os.environ["OPENAI_API_KEY"] = config.OPENAI_API_KEY
 
 
-@tool
+# @tool
 def search_web(query):
     """
     Performs search on Google Shopping.
@@ -24,24 +26,27 @@ def search_web(query):
          Returns:
         - search results: string return.
     """
-    vectorstore = Chroma(
-        embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai"
-    )
+    # vectorstore = Chroma(
+    #     embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai"
+    # )
 
-    # LLM
-    llm = ChatOpenAI(openai_api_key=config.OPENAI_API_KEY, temperature=0)
+    # vectorstore = FAISS(embedding_function=OpenAIEmbeddings())
 
-    # Search
-    search = GoogleSearchAPIWrapper()
+    # # LLM
+    # llm = ChatOpenAI(openai_api_key=config.OPENAI_API_KEY, temperature=0)
 
-    # Initialize
-    web_research_retriever = WebResearchRetriever.from_llm(
-        vectorstore=vectorstore, llm=llm, search=search
-    )
+    # # Search
+    # search = GoogleSearchAPIWrapper()
 
-    qa_chain = RetrievalQAWithSourcesChain.from_chain_type(
-        llm, retriever=web_research_retriever
-    )
+    # # Initialize
+    # web_research_retriever = WebResearchRetriever.from_llm(
+    #     vectorstore=vectorstore, llm=llm, search=search
+    # )
 
-    result = qa_chain({"question": query})
+    # qa_chain = RetrievalQAWithSourcesChain.from_chain_type(
+    #     llm, retriever=web_research_retriever
+    # )
+
+    # result = qa_chain({"question": query})
+    result = True
     return result
